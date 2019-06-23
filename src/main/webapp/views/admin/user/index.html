@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Admin HCM | User</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	
+	<!-- starting css -->
+	<div th:replace="admin/static/css :: css">...</div>
+	<!-- end css -->
+</head>
+<body class="hold-transition skin-purple sidebar-mini">
+<div class="wrapper">
+    <!-- starting header -->
+    <div th:replace="admin/static/header :: header">...</div>
+    <!-- end header -->
+
+    <!-- starting leftbar -->
+    <div th:replace="admin/static/leftbar :: leftbar">...</div>
+    <!-- end leftbar -->
+
+    <!--starting content -->
+    <div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					Users <small>advanced tables</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li><a href="#">Tables</a></li>
+					<li class="active">Data tables</li>
+				</ol>
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="box">
+							<div class="box-header">
+								<h3 class="box-title">
+									<button type="button" class="btn btn-default pull-right">
+										<a th:href="@{/admin/users/add}"><i class="fa fa-plus"></i> Add</a>
+									</button>
+									
+								</h3>
+							</div>
+							<!-- /.box-header -->
+							<div class="box-body">
+								<table id="example1" class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>STT</th>
+											<th>Name</th>
+											<th>Phone</th>
+											<th>Email</th>
+											<th>Address</th>
+											<th>Role</th>
+											<th>Function</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>Hien Ho</td>
+											<td>0123456789</td>
+											<td>thuhien@gmail.com</td>
+											<td>123 abc</td>
+											<td>Admin</td>
+											<td>
+												<button type="button" class="btn btn-default pull-right">
+													<i class="fa fa-pencil"></i>
+												</button>
+												<button type="button" class="btn btn-default pull-right">
+													<i class="fa fa-trash"></i>
+												</button>
+												<button type="button" class="btn btn-default pull-right">
+													<i class="fa fa-gg"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>2</td>
+											<td>Chau Vuong</td>
+											<td>0123456789</td>
+											<td>chau@gmail.com</td>
+											<td>123 abc</td>
+											<td>Admin</td>
+											<td>
+												<button type="button" class="btn btn-default pull-right">
+													<i class="fa fa-pencil"></i>
+												</button>
+												<button type="button" class="btn btn-default pull-right">
+													<i class="fa fa-trash"></i>
+												</button>
+												<button type="button" class="btn btn-default pull-right">
+													<i class="fa fa-gg"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>3</td>
+											<td>Hien Ho</td>
+											<td>0123456789</td>
+											<td>thuhien@gmail.com</td>
+											<td>123 abc</td>
+											<td>Admin</td>
+											<td>
+												<button type="button" class="btn btn-default pull-right">
+													<i class="fa fa-pencil"></i>
+												</button>
+												<button type="button" class="btn btn-default pull-right">
+													<i class="fa fa-trash"></i>
+												</button>
+												<button type="button" class="btn btn-default pull-right">
+													<i class="fa fa-gg"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>4</td>
+											<td>Minh Tran</td>
+											<td>0123456789</td>
+											<td>minh@gmail.com</td>
+											<td>123 abc</td>
+											<td>Admin</td>
+											<td>
+												<button type="button" class="btn btn-default pull-right">
+													<i class="fa fa-pencil"></i>
+												</button>
+												<button type="button" class="btn btn-default pull-right">
+													<i class="fa fa-trash"></i>
+												</button>
+												<button type="button" class="btn btn-default pull-right">
+													<i class="fa fa-gg"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>5</td>
+											<td>Bach Khoa</td>
+											<td>0123456789</td>
+											<td>bk@gmail.com</td>
+											<td>123 abc</td>
+											<td>Editor</td>
+											<td>
+												<button type="button" class="btn btn-default pull-right">
+													<i class="fa fa-pencil"></i>
+												</button>
+												<button type="button" class="btn btn-default pull-right">
+													<i class="fa fa-trash"></i>
+												</button>
+												<button type="button" class="btn btn-default pull-right">
+													<i class="fa fa-gg"></i>
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>6</td>
+											<td>Teohiho</td>
+											<td>0123456789</td>
+											<td>teo@gmail.com</td>
+											<td>123 abc</td>
+											<td>Editor</td>
+											<td>
+												<button type="button" class="btn btn-default pull-right">
+													<i class="fa fa-pencil"></i>
+												</button>
+												<button type="button" class="btn btn-default pull-right">
+													<i class="fa fa-trash"></i>
+												</button>
+												<button type="button" class="btn btn-default pull-right">
+													<i class="fa fa-gg"></i>
+												</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</section>
+			<!-- /.content -->
+		</div>
+    <!-- end content -->
+
+    <!-- starting footer -->
+    <div th:replace="admin/static/footer :: footer">...</div>
+    <!-- end footer -->
+
+    <!-- starting right bar -->
+    <div th:replace="admin/static/rightbar :: rightbar">...</div>
+    <!-- end rightbar -->
+
+    <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+<!-- starting js -->
+<div th:replace="admin/static/js :: js">...</div>
+<!-- end js -->
+</body>
+</html>
