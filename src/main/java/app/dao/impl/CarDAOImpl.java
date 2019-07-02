@@ -2,9 +2,7 @@ package app.dao.impl;
 
 import java.util.List;
 
-import javax.management.MXBean;
 
-import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 
 import app.dao.CarDAO;
@@ -18,13 +16,14 @@ public class CarDAOImpl extends GenericDAO<Integer, Car> implements CarDAO {
 		super(Car.class);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public List<Car> loadCars(Integer offset, Integer maxResults) {
 		return getSession().createCriteria(Car.class).setFirstResult(offset != null ? offset : 0)
 				.setMaxResults(maxResults != null ? maxResults : Constants.PAGESIZE).list();
 	}
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public long countCar() {
   
     	return (long)getSession().createCriteria(Car.class).setProjection(Projections.rowCount()).uniqueResult();

@@ -2,7 +2,6 @@ package app.controller.admin;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
@@ -39,7 +38,7 @@ public class CarController extends BaseController {
 	}
 
 	@RequestMapping(value = { "/index/page/{pageNumber}" }, method = RequestMethod.GET)
-	public ModelAndView showCarPage(HttpServletRequest request, @PathVariable int pageNumber, Model model) {
+	public ModelAndView index(@PathVariable int pageNumber, Model model) {
 
 		int pageSize = Constants.PAGESIZE;
 

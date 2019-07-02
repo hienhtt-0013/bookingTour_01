@@ -52,11 +52,11 @@
 
 								</h3>
 							</div>
-							<th:block th:if="${#lists.isEmpty(list.pageList)}">
+							<th:block th:if="${#lists.isEmpty(page.pageList)}">
 								<h3>No user be found</h3>
 							</th:block>
 
-							<th:block th:unless="${ #lists.isEmpty(list.pageList)}">
+							<th:block th:unless="${ #lists.isEmpty(page.pageList)}">
 								<!-- /.box-header -->
 								<div class="box-body">
 									<table id="example1" class="table table-bordered table-striped">
@@ -72,8 +72,8 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr th:each="user : ${list.pageList}">
-												<td th:text=${list.pageList.indexOf(user)}></td>
+											<tr th:each="user : ${page.pageList}">
+												<td th:text=${page.pageList.indexOf(user)}></td>
 												<td th:text=${user.username}></td>
 												<td th:text=${user.phoneNumber}></td>
 												<td th:text=${user.email}></td>

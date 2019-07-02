@@ -1,18 +1,13 @@
 package app.service.impl;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import app.model.Role;
 import app.model.User;
 import app.service.UserService;
 import app.util.DateUtil;
@@ -46,14 +41,24 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> loadUsers() {
+	public List<User> loadUsers(Integer offset,Integer maxresult) {
 		try {
-			return getUserDAO().loadUsers();
+			return getUserDAO().loadUsers(offset,maxresult);
 		} catch (Exception e) {
 			return null;
 		}
 	}
-
+   
+	@SuppressWarnings("null")
+	@Override
+	public long countUser() {
+		try {
+           return getUserDAO().countUser();
+		} catch (Exception e) {
+			return (Long) null;
+		}
+	}
+	
 	@Override
 	public User findById(Serializable key) {
 		try {

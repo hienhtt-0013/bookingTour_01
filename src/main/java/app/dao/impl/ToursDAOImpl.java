@@ -23,6 +23,6 @@ public class ToursDAOImpl extends GenericDAO<Integer, Tours> implements ToursDao
 		return getSession().createQuery("from Tours as T ORDER BY T.tourSaleOff DESC").getResultList();
 	}
 	public Tours maxSaleOffTours() {
-		return (Tours) getSession().createQuery("from Tours as T ORDER BY T.tourSaleOff DESC").getSingleResult();
+		return (Tours) getSession().createQuery("from Tours as T ORDER BY T.tourSaleOff DESC").getResultList().get(0);
 	}
 }
