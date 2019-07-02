@@ -13,13 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import app.helper.Constants;
+import app.model.Role;
 import app.model.User;
 import app.service.UserService;
 
 @RequestMapping("admin/users/")
 @Controller
 public class UserController extends BaseController {
-
+	public UserService getUserService() {
+		return userService;
+	}
 	@Autowired
 	private UserService userService;
 
@@ -61,8 +64,15 @@ public class UserController extends BaseController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String add(@ModelAttribute("user") User user) {
-		userService.saveOrUpdate(user);
-		return "redirect:/admin/user/";
+	public String add(@ModelAttribute("userForm") User userForm) {
+		String roleName = null;
+		int roleId = 0;
+		for(Role role: userForm.getRoles()){
+			roleName = role.getName();
+		}
+		if(roleName.equals("ROLE_ADMIN")) roleId = 1;
+		else if(roleName.equals("ROLE_EDITOR")) roleId = 2;
+		getUserService().createUser(userForm, roleId, roleName);
+		return "redirect:/admin/users/index/page/1";
 	}
 }

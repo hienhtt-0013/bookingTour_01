@@ -102,13 +102,13 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	}
 
 	@Override
-	public User createUser(User user) {
+	public User createUser(User user, int role_id, String role_name) {
 		try {
 			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 			
 			RoleUtil roleUtil = new RoleUtil();
 			
-			user.setRoles(new HashSet<>(roleUtil.roleUtil(3, "ROLE_USER")));
+			user.setRoles(new HashSet<>(roleUtil.roleUtil(role_id, role_name)));
 
 			DateUtil dateUtil = new DateUtil();
 			java.sql.Date sqlDate = dateUtil.dateUtil("yyyy-MM-dd");

@@ -60,7 +60,7 @@
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Password</label>
-										<input class="form-control" id="exampleInputPassword1"
+										<input type="password" class="form-control" id="exampleInputPassword1"
 											placeholder="Enter password" th:field="*{password}">
 									</div>
 									<div class="form-group">
@@ -73,6 +73,20 @@
 										<input class="form-control" id="exampleInputAddress1"
 											placeholder="Enter address" th:field="*{address}">
 									</div>
+									<div class="form-group">
+										<label for="exampleInputPhoneNumber1">Phone Number</label>
+										<input class="form-control" id="exampleInputPhoneNumber1"
+											placeholder="Enter phone number" th:field="*{phoneNumber}">
+									</div>
+									<!-- select -->
+                                    <div class="form-group">
+                                        <label>Select role</label>
+                                        <select th:field="*{roles}" class="form-control">
+                                            <option th:value="'ROLE_ADMIN'" th:text=ADMIN></option>
+                                            <option th:value="'ROLE_EDITOR'" th:text=EDITOR></option>
+                                        </select>
+                                    </div>
+									
 								</div>
 								<!-- /.box-body -->
 								<div class="box-footer">

@@ -73,7 +73,9 @@ public class AuthController extends BaseController{
 		if (result.hasErrors()) {
             return "register";
         }
-		getUserService().createUser(userForm);
+		int role_id = 3;
+		String role_name = "ROLE_USER";
+		getUserService().createUser(userForm, role_id, role_name);
 		return "redirect:/login";
 	}
 }

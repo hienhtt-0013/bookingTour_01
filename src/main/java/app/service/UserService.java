@@ -12,6 +12,6 @@ public interface UserService extends BaseService<Integer, User> {
 	long countUser();
 	User findByUser(String username);
 	User checkLogin(String username, String password);
-	User createUser(User user);
+	User createUser(User user, int role_id, String role_name);
 	
 }
