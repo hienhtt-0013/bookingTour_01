@@ -16,5 +16,10 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
+	<bean id="toursDAO" class="app.dao.impl.ToursDAOImpl">
+
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
 	<bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 </beans>

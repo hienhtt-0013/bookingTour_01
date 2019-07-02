@@ -38,7 +38,6 @@ public class CarController extends BaseController {
 		return "redirect:/admin/cars/index/page/1";
 	}
 
-
 	@RequestMapping(value = { "/index/page/{pageNumber}" }, method = RequestMethod.GET)
 	public ModelAndView showCarPage(HttpServletRequest request, @PathVariable int pageNumber, Model model) {
 
@@ -111,5 +110,4 @@ public class CarController extends BaseController {
 		redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 		return "redirect:/admin/cars/index/page/" + idPage;
 	}
-
 }
