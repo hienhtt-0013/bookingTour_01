@@ -8,7 +8,7 @@ import app.model.User;
 
 
 public interface UserService extends BaseService<Integer, User> {
-	boolean deleteUser(Integer id);
+	boolean deleteUser(Long id);
 
 	List<User> loadUsers(Integer offset,Integer maxResult);
 	long countUser();

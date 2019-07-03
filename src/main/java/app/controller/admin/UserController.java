@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -67,5 +68,20 @@ public class UserController extends BaseController {
 		redirectAttributes.addFlashAttribute("message", getProperties().getProperty("sucess.saveUser"));
 		redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 		return "redirect:/admin/users/index/page/1";
+	}
+	
+	@RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
+	public String delete(@PathVariable Long id, @RequestParam int idPage,
+			RedirectAttributes redirectAttributes) {
+		
+		if(userService.deleteUser(id)) {
+			redirectAttributes.addFlashAttribute("message", getProperties().getProperty("sucess.deleteUser"));
+			redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+		}else {
+			redirectAttributes.addFlashAttribute("message", getProperties().getProperty("error.deleteUser"));
+			redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
+		}
+		
+		return "redirect:/admin/users/index/page/" + idPage;
 	}
 }

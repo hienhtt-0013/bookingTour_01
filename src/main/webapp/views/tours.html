@@ -42,214 +42,103 @@
 		<!-- starting header -->
 		<div th:replace="static/header :: header">...</div>
 		<!-- end header -->
-		
+
 		<aside id="colorlib-hero">
 			<div class="flexslider">
 				<ul class="slides">
-			   	<li style="background-image: url(/BookingTour/assets/images/img_bg_3.jpg);">
-			   		<div class="overlay"></div>
-			   		<div class="container-fluid">
-			   			<div class="row">
-				   			<div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
-				   				<div class="slider-text-inner text-center">
-				   					<h2>by colorlib.com</h2>
-				   					<h1>Find Tours</h1>
-				   				</div>
-				   			</div>
-				   		</div>
-			   		</div>
-			   	</li>
-			  	</ul>
-		  	</div>
+					<li
+						style="background-image: url(/BookingTour/assets/images/img_bg_3.jpg);">
+						<div class="overlay"></div>
+						<div class="container-fluid">
+							<div class="row">
+								<div
+									class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+									<div class="slider-text-inner text-center">
+										<h2>by colorlib.com</h2>
+										<h1>Find Tours</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
 		</aside>
+
+		<th:block th:if="${#lists.isEmpty(page.pageList)}">
+			<h3>No car be found</h3>
+		</th:block>
 
 		<div class="colorlib-wrap">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-9">
-						<div class="row">
-							<div class="wrap-division">
-								<div class="col-md-6 col-sm-6 animate-box">
-									<div class="tour">
-										<a href="tour-place.html" class="tour-img"
-											style="background-image: url(/BookingTour/assets/images/tour-1.jpg);">
-											<p class="price">
-												<span>$1500</span> <small>/ 3 Days</small>
-											</p>
-										</a> <span class="desc">
-											<p class="star">
-												<span><i class="icon-star-full"></i><i
-													class="icon-star-full"></i><i class="icon-star-full"></i><i
-													class="icon-star-full"></i><i class="icon-star-full"></i></span>
-												545 Reviews
-											</p>
-											<h2>
-												<a href="tour-place.html">Family Tour in Greece</a>
-											</h2> <span class="city">Athens, Greece</span>
-										</span>
-									</div>
-								</div>
 
-								<div class="col-md-6 col-sm-6 animate-box">
-									<div class="tour">
-										<a href="tour-place.html" class="tour-img"
-											style="background-image: url(/BookingTour/assets/images/tour-2.jpg);">
-											<p class="price">
-												<span>$1500</span> <small>/ 3 Days</small>
-											</p>
-										</a> <span class="desc">
-											<p class="star">
-												<span><i class="icon-star-full"></i><i
-													class="icon-star-full"></i><i class="icon-star-full"></i><i
-													class="icon-star-full"></i><i class="icon-star-full"></i></span>
-												545 Reviews
-											</p>
-											<h2>
-												<a href="tour-place.html">Family Tour in Greece</a>
-											</h2> <span class="city">Athens, Greece</span>
-										</span>
-									</div>
-								</div>
+						<th:block th:unless="${ #lists.isEmpty(page.pageList)}">
+							<div class="row">
+								<div th:each="tour : ${page.pageList}" class="wrap-division">
 
-								<div class="col-md-6 col-sm-6 animate-box">
-									<div class="tour">
-										<a href="tour-place.html" class="tour-img"
-											style="background-image: url(/BookingTour/assets/images/tour-3.jpg);">
-											<p class="price">
-												<span>$1500</span> <small>/ 3 Days</small>
-											</p>
-										</a> <span class="desc">
-											<p class="star">
-												<span><i class="icon-star-full"></i><i
-													class="icon-star-full"></i><i class="icon-star-full"></i><i
-													class="icon-star-full"></i><i class="icon-star-full"></i></span>
-												545 Reviews
-											</p>
-											<h2>
-												<a href="tour-place.html">Family Tour in Greece</a>
-											</h2> <span class="city">Athens, Greece</span>
-										</span>
-									</div>
-								</div>
 
-								<div class="col-md-6 col-sm-6 animate-box">
-									<div class="tour">
-										<a href="tour-place.html" class="tour-img"
-											style="background-image: url(/BookingTour/assets/images/tour-4.jpg);">
-											<p class="price">
-												<span>$1500</span> <small>/ 3 Days</small>
-											</p>
-										</a> <span class="desc">
-											<p class="star">
-												<span><i class="icon-star-full"></i><i
-													class="icon-star-full"></i><i class="icon-star-full"></i><i
-													class="icon-star-full"></i><i class="icon-star-full"></i></span>
-												545 Reviews
-											</p>
-											<h2>
-												<a href="tour-place.html">Family Tour in Greece</a>
-											</h2> <span class="city">Athens, Greece</span>
-										</span>
+									<div class="col-md-6 col-sm-6 animate-box">
+										<div class="tour">
+											<a href="tour-place.html" class="tour-img"
+												th:style="'background-image:url(' + @{'/assets/images/'+${tour.tourImage}} + ');'">
+												<p class="price">
+													<span th:text=${tour.tourPrice}></span>$ <small>/ Saleoff
+													   &nbsp; <span th:text=${tour.tourSaleOff}></span> %
+													</small>
+												</p>
+											</a> <span class="desc">
+												<p class="star">
+													<span><i class="icon-star-full"></i><i
+														class="icon-star-full"></i><i class="icon-star-full"></i><i
+														class="icon-star-full"></i><i class="icon-star-full"></i></span>
+													545 Reviews
+												</p>
+												<h2>
+													<a href="tour-place.html">Family Tour in Greece</a>
+												</h2> <span class="city" th:text=${tour.tourTitle}>Athens,
+													Greece</span>
+											</span>
+										</div>
 									</div>
-								</div>
 
-								<div class="col-md-6 col-sm-6 animate-box">
-									<div class="tour">
-										<a href="tour-place.html" class="tour-img"
-											style="background-image: url(/BookingTour/assets/images/tour-5.jpg);">
-											<p class="price">
-												<span>$1500</span> <small>/ 3 Days</small>
-											</p>
-										</a> <span class="desc">
-											<p class="star">
-												<span><i class="icon-star-full"></i><i
-													class="icon-star-full"></i><i class="icon-star-full"></i><i
-													class="icon-star-full"></i><i class="icon-star-full"></i></span>
-												545 Reviews
-											</p>
-											<h2>
-												<a href="tour-place.html">Family Tour in Greece</a>
-											</h2> <span class="city">Athens, Greece</span>
-										</span>
-									</div>
-								</div>
-
-								<div class="col-md-6 col-sm-6 animate-box">
-									<div class="tour">
-										<a href="tour-place.html" class="tour-img"
-											style="background-image: url(/BookingTour/assets/images/tour-6.jpg);">
-											<p class="price">
-												<span>$1500</span> <small>/ 3 Days</small>
-											</p>
-										</a> <span class="desc">
-											<p class="star">
-												<span><i class="icon-star-full"></i><i
-													class="icon-star-full"></i><i class="icon-star-full"></i><i
-													class="icon-star-full"></i><i class="icon-star-full"></i></span>
-												545 Reviews
-											</p>
-											<h2>
-												<a href="tour-place.html">Family Tour in Greece</a>
-											</h2> <span class="city">Athens, Greece</span>
-										</span>
-									</div>
-								</div>
-
-								<div class="col-md-6 col-sm-6 animate-box">
-									<div class="tour">
-										<a href="tour-place.html" class="tour-img"
-											style="background-image: url(/BookingTour/assets/images/tour-7.jpg);">
-											<p class="price">
-												<span>$1500</span> <small>/ 3 Days</small>
-											</p>
-										</a> <span class="desc">
-											<p class="star">
-												<span><i class="icon-star-full"></i><i
-													class="icon-star-full"></i><i class="icon-star-full"></i><i
-													class="icon-star-full"></i><i class="icon-star-full"></i></span>
-												545 Reviews
-											</p>
-											<h2>
-												<a href="tour-place.html">Family Tour in Greece</a>
-											</h2> <span class="city">Athens, Greece</span>
-										</span>
-									</div>
-								</div>
-
-								<div class="col-md-6 col-sm-6 animate-box">
-									<div class="tour">
-										<a href="tour-place.html" class="tour-img"
-											style="background-image: url(/BookingTour/assets/images/tour-8.jpg);">
-											<p class="price">
-												<span>$1500</span> <small>/ 3 Days</small>
-											</p>
-										</a> <span class="desc">
-											<p class="star">
-												<span><i class="icon-star-full"></i><i
-													class="icon-star-full"></i><i class="icon-star-full"></i><i
-													class="icon-star-full"></i><i class="icon-star-full"></i></span>
-												545 Reviews
-											</p>
-											<h2>
-												<a href="tour-place.html">Family Tour in Greece</a>
-											</h2> <span class="city">Athens, Greece</span>
-										</span>
-									</div>
 								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12 text-center">
-								<ul class="pagination">
-									<li class="disabled"><a href="#">&laquo;</a></li>
-									<li class="active"><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">&raquo;</a></li>
-								</ul>
+							<div class="row">
+								<div class="col-md-12 text-center">
+									<ul class="pagination">
+										<li
+											th:class="${currentIndex == 1? 'page-item disabled' : 'page-item'}">
+											<a class="page-link" th:href="@{/tours/index}">First</a>
+										</li>
+										<li
+											th:class="${currentIndex == 1? 'page-item disabled': 'page-item' }">
+											<a class="page-link" aria-label="Previous"
+											th:href="@{${currentIndex - 1}}" title='Go to previous page'><span
+												aria-hidden="true">«</span> <span class="sr-only">Previous</span></a>
+										</li>
+										<li th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"
+											th:class="${item == currentIndex ? 'page-item active' :'page-item' }">
+											<a class="page-link" th:href="@{${item}}"> <span
+												th:text='${item}'>1</span>
+										</a>
+										</li>
+										<li
+											th:class="${currentIndex == totalPageCount? 'page-item disabled': 'page-item'}">
+											<a class="page-link" aria-label="Next"
+											th:href="@{${currentIndex + 1}}" title='Go to next page'><span
+												aria-hidden="true">»</span> <span class="sr-only">Next</span></a>
+										</li>
+										<li
+											th:class="${currentIndex == totalPageCount? 'page-item disabled':'page-item'}">
+											<a class="page-link" th:href="@{${totalPageCount}}">Last</a>
+										</li>
+									</ul>
+								</div>
 							</div>
-						</div>
+
+						</th:block>
 					</div>
 
 					<!-- SIDEBAR-->
@@ -473,4 +362,3 @@
 
 </body>
 </html>
-

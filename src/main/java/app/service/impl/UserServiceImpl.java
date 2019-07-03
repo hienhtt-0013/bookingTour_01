@@ -33,7 +33,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean deleteUser(Integer id) {
+	public boolean deleteUser(Long id) {
 		try {
 			User user = getUserDAO().findById(id);
 			return delete(user);
