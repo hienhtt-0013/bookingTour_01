@@ -1,4 +1,4 @@
-package app.controller;
+package app.controller.admin;
 
 import java.util.Map;
 
@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import app.controller.admin.BaseController;
+import app.model.Role;
 import app.model.User;
 import app.service.RoleService;
 import app.service.UserService;
 
 @Controller
-public class AuthController extends BaseController{
+@RequestMapping("admin/")
+public class AuthAdminController extends BaseController{
 	public RoleService getRoleService() {
 		return roleService;
 	}
@@ -36,54 +38,29 @@ public class AuthController extends BaseController{
 	public String login(Map<String, User> model) {
 		User user = new User();
 		model.put("user", user);
-		return "login";
+		return "admin/login";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@Valid @ModelAttribute("user") User user, BindingResult result, Model model, HttpSession session, ModelMap modelMap, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
-            return "login";
+            return "admin/login";
         }
 		User user1 = userService.checkLogin(user.getUsername(), user.getPassword());
+		//---- Login success
+		// Check role
 		if(user1 != null) {
 			session.setAttribute("current_user", user1.getUsername());
-			return "redirect:/";
+			return "redirect:/admin/index";
 		}
-		
+		//---- Login fail
 		modelMap.put("message_login", getProperties().getProperty("error.login"));
-		return "login";
+		return "admin/login";
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
 		session.removeAttribute("current_user");
-		return "redirect:/";
-	}
-	
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String register(Map<String, User> model) {
-		User user = new User();
-		model.put("user", user);
-		return "register";
-	}
-	
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String register(@Valid @ModelAttribute("user") User user, BindingResult result, Model model, ModelMap modelMap) {
-		if (result.hasErrors()) {
-            return "register";
-        }
-		// Check exist
-		if( (userService.findByUser(user.getUsername()) != null) ) {
-			modelMap.put("message_exist", getProperties().getProperty("error.existUser"));
-			return "register";
-			// Check Password Confirm
-		} else if(!user.getPasswordConfirm().equals(user.getPassword())) {
-			modelMap.put("message_matchPass", getProperties().getProperty("error.matchPass"));
-			return "register";
-		} 
-		// OK save
-		userService.createUserPublic(user);
-		modelMap.put("message_login", getProperties().getProperty("sucess.register"));
-		return "login";
+		return "redirect:/admin/login";
 	}
 }

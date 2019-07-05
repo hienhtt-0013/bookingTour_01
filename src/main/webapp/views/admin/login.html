@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Log in HCM</title>
+    <title>Admin HCM | Log in</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     
@@ -30,13 +30,13 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="index.html"><b>HCM</b>User</a>
+            <a href="index.html"><b>HCM</b>Admin</a>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
             <p class="login-box-msg">Sign in to start your session</p>
 
-            <form role="form" th:action="@{/login}" method="post" th:object="${user}">
+            <form role="form" th:action="@{/admin/login}" method="post" th:object="${user}">
             	<!-- <span class="errormsg" th:text=${errLogin}></span> -->
                
                 <div th:if="${message_login}" th:text="${message_login}" class="formError"></div>
