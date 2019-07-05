@@ -20,9 +20,10 @@
     <!-- iCheck -->
     <link rel="stylesheet" th:href="@{/assets/admin/css/blue1.css}">
 	<style type="text/css">
-        .errormsg {
-            color: red;
-        }
+       .formError {
+		    color: red;
+		    font-style: italic;
+		}
     </style>
 </head>
 
@@ -35,18 +36,22 @@
         <div class="login-box-body">
             <p class="login-box-msg">Sign in to start your session</p>
 
-            <form role="form" th:action="@{/login}" method="post">
+            <form role="form" th:action="@{/login}" method="post" th:object="${user}">
             	<!-- <span class="errormsg" th:text=${errLogin}></span> -->
                
-                <div th:if="${message_login}" th:text="${message_login}" class="errormsg"></div>
+                <div th:if="${message_login}" th:text="${message_login}" class="formError"></div>
                 
                 <div class="form-group has-feedback">
-                    <input type="text" class="form-control" placeholder="Usename" name="username" required="true">
+                    <input type="text" class="form-control" placeholder="Usename" name="username" >
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                	<span class="formError" th:if="${#fields.hasErrors('username')}"
+                                th:errors="*{username}">Invalid username</span>
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="password" class="form-control" placeholder="Password" name="password" required="true">
+                    <input type="password" class="form-control" placeholder="Password" name="password" >
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                	<span class="formError" th:if="${#fields.hasErrors('password')}"
+                                th:errors="*{password}">Invalid password</span>
                 </div>
                 <div class="row">
                     <div class="col-xs-8">

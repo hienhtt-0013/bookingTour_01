@@ -11,6 +11,12 @@
 	<!-- starting css -->
 	<div th:replace="admin/static/css :: css">...</div>
 	<!-- end css -->
+	<style type="text/css">
+       .formError {
+		    color: red;
+		    font-style: italic;
+		}
+    </style>
 </head>
 <body class="hold-transition skin-purple sidebar-mini">
 <div class="wrapper">
@@ -49,6 +55,8 @@
                             </div>
                             <!-- /.box-header -->
                             <!-- form start -->
+                            <div th:if="${message_exist}" th:text="${message_exist}" class="formError"></div>
+	<div th:if="${message_matchPass}" th:text="${message_matchPass}" class="formError"></div>
                             <form role="form" th:action="@{/admin/users/create/}" method="post"
 								th:object="${user}">
 
@@ -57,16 +65,28 @@
 										<label for="exampleInputUser1">Username</label>
 										<input class="form-control" id="exampleInputUser1"
 											placeholder="Enter username" th:field="*{username}">
+										<span class="formError" th:if="${#fields.hasErrors('username')}"
+                                th:errors="*{username}">Invalid username</span>
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Password</label>
 										<input type="password" class="form-control" id="exampleInputPassword1"
 											placeholder="Enter password" th:field="*{password}">
+										<span class="formError" th:if="${#fields.hasErrors('password')}"
+                                th:errors="*{password}">Invalid password</span>	
+									</div>
+									<div class="form-group">
+										<label for="exampleInputPassword1">Password Confirm</label>
+										<input type="password" class="form-control" id="exampleInputPassword1"
+											placeholder="Enter password confirm" th:field="*{passwordConfirm}">
+
 									</div>
 									<div class="form-group">
 										<label for="exampleInputEmail1">Email</label>
 										<input class="form-control" id="exampleInputEmail1"
 											placeholder="Enter email" th:field="*{email}">
+										<span class="formError" th:if="${#fields.hasErrors('email')}"
+                                th:errors="*{email}">Invalid email</span>
 									</div>
 									<div class="form-group">
 										<label for="exampleInputAddress1">Address</label>

@@ -27,24 +27,32 @@ public class BaseController {
 	public long setEndPagination(long count) {
 		if (count % Constants.PAGESIZE == 0)
 			return count / Constants.PAGESIZE;
-		
+
 		return count / Constants.PAGESIZE + 1;
+	}
+
+	private long setlimitPage(long end) {
+		if (end < Constants.LIMITOFPAGELOAD)
+			return end;
+
+		return Constants.LIMITOFPAGELOAD;
+	}
+
+	private long checkLimitPage(long begin, long end) {
+		long limitpage = Constants.LIMITOFPAGELOAD + begin - 1;
+		if (limitpage > end)
+			limitpage = end;
+
+		return limitpage;
 	}
 
 	public Model setPaginationModelObject(int pageNumber, long end, Model model) {
 		long begin = Constants.BEGINPAGEFIRST;
-		long limitpage = 0;
+		long limitpage = setlimitPage(end);
 
-		if (end < Constants.LIMITOFPAGELOAD)
-			limitpage = end;
-		else {
-			limitpage = Constants.LIMITOFPAGELOAD;
-			if (pageNumber >= (limitpage + begin)) {
-				begin = (begin + limitpage) * (pageNumber / limitpage);
-				limitpage = limitpage + (begin - 1);
-				if (limitpage > end)
-					limitpage = end;
-			}
+		if (pageNumber >= (limitpage + begin)) {
+			begin = (begin + Constants.LIMITOFPAGELOAD) * (pageNumber / Constants.LIMITOFPAGELOAD);
+			limitpage = checkLimitPage(begin, end);
 		}
 		model.addAttribute("beginIndex", begin);
 		model.addAttribute("endIndex", limitpage);

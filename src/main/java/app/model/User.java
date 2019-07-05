@@ -13,6 +13,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "users")
@@ -21,16 +25,19 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	// @NotEmpty(message = "{NotEmpty}")
+	@NotEmpty(message = "#{NotEmpty}")
+	@Size(min=4, max=20)
 	private String username;
 
 	private String phoneNumber;
 
-	// @Email(message = "{User.email.invalid}")
+	@Email(message = "#{User.email.invalid}")
 	private String email;
 	private String address;
 
-	// @Size(min=6, max=10, message="{Size.userForm.password}")
+	
+	@NotEmpty(message = "#{NotEmpty}")
+	@Size(min=6)
 	private String password;
 	private String passwordConfirm;
 	private Date createAt;

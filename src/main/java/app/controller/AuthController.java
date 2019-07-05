@@ -22,9 +22,6 @@ import app.service.UserService;
 
 @Controller
 public class AuthController extends BaseController{
-	public UserService getUserService() {
-		return userService;
-	}
 	public RoleService getRoleService() {
 		return roleService;
 	}
@@ -36,7 +33,9 @@ public class AuthController extends BaseController{
     private RoleService roleService;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(Map<String, Object> model) {
+	public String login(Map<String, User> model) {
+		User user = new User();
+		model.put("user", user);
 		return "login";
 	}
 	
@@ -45,7 +44,7 @@ public class AuthController extends BaseController{
 		if (result.hasErrors()) {
             return "login";
         }
-		User user1 = getUserService().checkLogin(user.getUsername(), user.getPassword());
+		User user1 = userService.checkLogin(user.getUsername(), user.getPassword());
 		if(user1 != null) {
 			session.setAttribute("current_user", user1.getUsername());
 			return "redirect:/";
@@ -62,17 +61,29 @@ public class AuthController extends BaseController{
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String register(Model model) {
-		model.addAttribute("userForm", new User());
+	public String register(Map<String, User> model) {
+		User user = new User();
+		model.put("user", user);
 		return "register";
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String register(@ModelAttribute("userForm") User userForm, BindingResult result, Model model) {
+	public String register(@Valid @ModelAttribute("user") User user, BindingResult result, Model model, ModelMap modelMap) {
 		if (result.hasErrors()) {
             return "register";
         }
-		getUserService().createUserPublic(userForm);
-		return "redirect:/login";
+		// Check exist
+		if( (userService.findByUser(user.getUsername()) != null) ) {
+			modelMap.put("message_exist", getProperties().getProperty("error.existUser"));
+			return "register";
+			// Check Password Confirm
+		} else if(!user.getPasswordConfirm().equals(user.getPassword())) {
+			modelMap.put("message_matchPass", getProperties().getProperty("error.matchPass"));
+			return "register";
+		} 
+		// OK lưu
+		userService.createUserPublic(user);
+		modelMap.put("message_login", getProperties().getProperty("sucess.register"));
+		return "login";
 	}
 }

@@ -2,10 +2,14 @@ package app.controller.admin;
 
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,15 +60,28 @@ public class UserController extends BaseController {
 	}
 
 	@RequestMapping(value = "/new")
-	public String add(Map<String, Object> model) {
+	public String add(Map<String, User> model) {
 		User user = new User();
 		model.put("user", user);
 		return "admin/user/add";
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String add(@ModelAttribute("userForm") User userForm, RedirectAttributes redirectAttributes) {
-		userService.createUserAdmin(userForm);
+	public String add(@Valid @ModelAttribute("user") User user,BindingResult result, RedirectAttributes redirectAttributes, ModelMap modelMap) {
+		if (result.hasErrors()) {
+            return "admin/user/add";
+        }
+		// Check exist
+		if( (userService.findByUser(user.getUsername()) != null) ) {
+			modelMap.put("message_exist", getProperties().getProperty("error.existUser"));
+			return "admin/user/add";
+			// Check Password Confirm
+		} else if(!user.getPasswordConfirm().equals(user.getPassword())) {
+			modelMap.put("message_matchPass", getProperties().getProperty("error.matchPass"));
+			return "admin/user/add";
+		}
+		// OK lưu
+		userService.createUserAdmin(user);
 		redirectAttributes.addFlashAttribute("message", getProperties().getProperty("sucess.saveUser"));
 		redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 		return "redirect:/admin/users/index/page/1";
