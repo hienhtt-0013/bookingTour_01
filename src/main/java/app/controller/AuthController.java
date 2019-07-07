@@ -86,4 +86,5 @@ public class AuthController extends BaseController{
 		modelMap.put("message_login", getProperties().getProperty("sucess.register"));
 		return "login";
 	}
+	
 }
